@@ -35,12 +35,13 @@ jobs:
         with:
           python-version: 3.8.5
       - run: |
-          pip install poetry
           pip install pytest
           pip install pytest-cov
           make install
+          make test-coverage
           - uses: paambaati/codeclimate-action@v2.7.5
             env:
               CC_TEST_REPORTER_ID: ${{ secrets.COVERAGE_TEST }}
             with:
               coverageCommand: make test-coverage
+              debug: true
