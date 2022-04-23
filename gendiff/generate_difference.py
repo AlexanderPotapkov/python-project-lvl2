@@ -1,33 +1,30 @@
 import json
+import pathlib
+import yaml
+
+from gendiff.search_difference import search_difference
 
 
-def get_encoded_bools(first_file, second_file):
-    for key in first_file:
-        if type(first_file[key]) == bool:
-            first_file[key] = json.dumps(first_file[key])
-    for key in second_file:
-        if type(second_file[key]) == bool:
-            second_file[key] = json.dumps(second_file[key])
+def get_encoded_bools(file):
+    for key in file:
+        if type(file[key]) == bool:
+            file[key] = json.dumps(file[key])
 
 
 def generate_diff(file_path_1, file_path_2):
-    first_file = json.load(open(file_path_1))
-    second_file = json.load(open(file_path_2))
-    get_encoded_bools(first_file, second_file)
-    only_in_first_file = first_file.keys() - second_file.keys()
-    only_in_second_file = second_file.keys() - first_file.keys()
-    in_both_files = first_file.keys() & second_file.keys()
-    difference = []
-    for key in only_in_first_file:
-        difference.append(f'  - {key}: {first_file[key]}')
-    for key in only_in_second_file:
-        difference.append(f'  + {key}: {second_file[key]}')
-    for key in in_both_files:
-        if first_file[key] == second_file[key]:
-            difference.append(f'    {key}: {first_file[key]}')
-        else:
-            difference.append(f'  - {key}: {first_file[key]}')
-            difference.append(f'  + {key}: {second_file[key]}')
+    file_1_format = pathlib.PurePosixPath(file_path_1).suffix
+    file_2_format = pathlib.PurePosixPath(file_path_2).suffix
+    if file_1_format == '.json':
+        first_file = json.load(open(file_path_1))
+    elif file_1_format == '.yml' or file_1_format == '.yaml':
+        first_file = yaml.safe_load(open(file_path_1))
+    if file_2_format == '.json':
+        second_file = json.load(open(file_path_2))
+    elif file_2_format == '.yml' or file_2_format == '.yaml':
+        second_file = yaml.safe_load(open(file_path_2))
+    get_encoded_bools(first_file)
+    get_encoded_bools(second_file)
+    difference = search_difference(first_file, second_file)
     sorted_difference = sorted(difference, key=lambda x: x[4])
     result = '{\n' + '\n'.join(sorted_difference) + '\n}'
     return result
