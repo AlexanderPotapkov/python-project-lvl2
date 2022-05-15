@@ -1,3 +1,5 @@
-from gendiff.generate_difference import generate_diff
+"""Main module"""
 
-__all__ = ('generate_diff',)
+from gendiff.generator import generate_diff
+
+__all__ = ('generate_diff',)  # noqa: WPS410
