@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "python-project-lvl2"
-version = "0.1.0"
+version = "0.3.4"
 description = ""
 authors = ["Alexander Potapkov <xanben@mail.ru>"]
 
