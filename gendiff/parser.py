@@ -1,11 +1,22 @@
 import json
+
 import yaml
 
 
-def parser(file_data, file_type):
-    mapping = {
-        '.json': json.loads,
-        '.yaml': lambda file_data: yaml.load(file_data, Loader=yaml.SafeLoader),
-        '.yml': lambda file_data: yaml.load(file_data, Loader=yaml.SafeLoader),
-    }
-    return mapping[file_type](file_data)
+def get_dict(string, extension):
+    """
+    Return dictionary from string representation of both files.
+    arguments:
+    first_string: string representation of first file
+    second_string: string representation of second file
+    suffix: extension of files
+    """
+
+    if extension == '.json':
+        return json.loads(string)
+
+    elif extension in ['.yaml', '.yml']:
+        return yaml.safe_load(string)
+
+    else:
+        raise TypeError('Wrong extension!')
