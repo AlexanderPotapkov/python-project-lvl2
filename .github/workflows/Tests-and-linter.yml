@@ -39,4 +39,4 @@ jobs:
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.COVERAGE_TEST }}
       with:
-        coverageCommand: make test-coverage
+        coverageCommand: make fast-check
