@@ -34,18 +34,18 @@ def test_default_format():
             FILEPATH_JSON1, FILEPATH_JSON2, 'stylish'))
 
 
-@pytest.mark.parametrize('first_file, second_file, format, expected', [
-    (FILEPATH_JSON1_2, FILEPATH_JSON2_2,
-     'stylish', open(EXPECTATION_STYLISH, 'r').read()),
-    (FILEPATH_JSON1_2, FILEPATH_JSON2_2,
-     'plain', open(EXPECTATION_PLAIN, 'r').read()),
-    (FILEPATH_JSON1_2, FILEPATH_JSON2_2,
-     'json', open(EXPECTATION_JSON, 'r').read()),
-    (FILEPATH_YAML1_2, FILEPATH_YAML2_2,
-     'stylish', open(EXPECTATION_STYLISH, 'r').read()),
-    (FILEPATH_YAML1_2, FILEPATH_YAML2_2,
-     'plain', open(EXPECTATION_PLAIN, 'r').read()),
-    (FILEPATH_YAML1_2, FILEPATH_YAML2_2,
-     'json', open(EXPECTATION_JSON, 'r').read()), ])
-def test_generate_diff(first_file, second_file, format, expected):
-    assert generate_diff(first_file, second_file, format) == expected
+#@pytest.mark.parametrize('first_file, second_file, format, expected', [
+#    (FILEPATH_JSON1_2, FILEPATH_JSON2_2,
+#     'stylish', open(EXPECTATION_STYLISH, 'r').read()),
+#    (FILEPATH_JSON1_2, FILEPATH_JSON2_2,
+#     'plain', open(EXPECTATION_PLAIN, 'r').read()),
+#    (FILEPATH_JSON1_2, FILEPATH_JSON2_2,
+#     'json', open(EXPECTATION_JSON, 'r').read()),
+#    (FILEPATH_YAML1_2, FILEPATH_YAML2_2,
+#     'stylish', open(EXPECTATION_STYLISH, 'r').read()),
+#    (FILEPATH_YAML1_2, FILEPATH_YAML2_2,
+#     'plain', open(EXPECTATION_PLAIN, 'r').read()),
+#    (FILEPATH_YAML1_2, FILEPATH_YAML2_2,
+#     'json', open(EXPECTATION_JSON, 'r').read()), ])
+#def test_generate_diff(first_file, second_file, format, expected):
+#    assert generate_diff(first_file, second_file, format) == expected
