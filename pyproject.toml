@@ -1,9 +1,10 @@
 [tool.poetry]
 name = "hexlet-code"
 version = "0.1.0"
-description = ""
+description = "Second project. Generate difference JSON/YAML files"
+classifiers = ["Programming language :: Python :: 3.8"]
 authors = ["Alexander Potapkov <xanben@mail.ru>"]
-
+repository = "https://github.com/AlexanderPotapkov/python-project-lvl2"
 packages = [
   { include = "gendiff" },
 ]
