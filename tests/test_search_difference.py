@@ -1,14 +1,8 @@
 from gendiff.search_difference import (
     get_keys,
-    is_dictionary,
     search_difference,
     get_value
 )
-
-
-def test_is_dictionary():
-    assert is_dictionary({"key": "value", "not_key": "not_value"}) is True
-    assert is_dictionary("100_percent_dictionary") is False
 
 
 def test_get_keys():

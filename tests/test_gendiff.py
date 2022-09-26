@@ -1,11 +1,5 @@
 import pytest
 from gendiff.generate_difference import generate_diff
-from tests.fixtures.expected import (SIMPLE_STYLISH,
-                                     SIMPLE_PLAIN,
-                                     SIMPLE_JSON,
-                                     COMPLEX_STYLISH,
-                                     COMPLEX_PLAIN,
-                                     COMPLEX_JSON)
 
 FILEPATH_JSON_1_1 = 'tests/fixtures/simple_1.json'
 FILEPATH_JSON_1_2 = 'tests/fixtures/simple_2.json'
@@ -16,6 +10,12 @@ FILEPATH_YAML_1_2 = 'tests/fixtures/simple_2.yaml'
 FILEPATH_YAML_2_1 = 'tests/fixtures/complex_1.yaml'
 FILEPATH_YAML_2_2 = 'tests/fixtures/complex_2.yaml'
 FILEPATH_WRONG = 'tests/fixtures/expectation_json.txt'
+SIMPLE_STYLISH = 'tests/fixtures/simple_stylish.txt'
+COMPLEX_STYLISH = 'tests/fixtures/complex_stylish.txt'
+SIMPLE_PLAIN = 'tests/fixtures/simple_plain.txt'
+COMPLEX_PLAIN = 'tests/fixtures/complex_plain.txt'
+SIMPLE_JSON = 'tests/fixtures/simple_json.txt'
+COMPLEX_JSON = 'tests/fixtures/complex_json.txt'
 
 
 def test_wrong_file_gendiff():
@@ -40,28 +40,26 @@ def test_default_format():
 
 @pytest.mark.parametrize('first_file, second_file, format, expected', [
     (FILEPATH_JSON_1_1, FILEPATH_JSON_1_2,
-     'stylish', SIMPLE_STYLISH),
+     'stylish', open(SIMPLE_STYLISH, 'r').read()),
     (FILEPATH_JSON_2_1, FILEPATH_JSON_2_2,
-     'stylish', COMPLEX_STYLISH),
+     'stylish', open(COMPLEX_STYLISH, 'r').read()),
     (FILEPATH_JSON_1_1, FILEPATH_JSON_1_2,
-     'plain', SIMPLE_PLAIN),
+     'plain', open(SIMPLE_PLAIN, 'r').read()),
     (FILEPATH_JSON_2_1, FILEPATH_JSON_2_2,
-     'plain', COMPLEX_PLAIN),
+     'plain', open(COMPLEX_PLAIN, 'r').read()),
     (FILEPATH_JSON_1_1, FILEPATH_JSON_1_2,
-     'json', SIMPLE_JSON),
+     'json', open(SIMPLE_JSON, 'r').read()),
     (FILEPATH_JSON_2_1, FILEPATH_JSON_2_2,
-     'json', COMPLEX_JSON),
+     'json', open(COMPLEX_JSON, 'r').read()),
     (FILEPATH_YAML_1_1, FILEPATH_YAML_1_2,
-     'stylish', SIMPLE_STYLISH),
-    (FILEPATH_YAML_2_1, FILEPATH_YAML_2_2,
-     'stylish', COMPLEX_STYLISH),
+     'stylish', open(SIMPLE_STYLISH, 'r').read()),
     (FILEPATH_YAML_1_1, FILEPATH_YAML_1_2,
-     'plain', SIMPLE_PLAIN),
+     'plain', open(SIMPLE_PLAIN, 'r').read()),
     (FILEPATH_YAML_2_1, FILEPATH_YAML_2_2,
-     'plain', COMPLEX_PLAIN),
+     'plain', open(COMPLEX_PLAIN, 'r').read()),
     (FILEPATH_YAML_1_1, FILEPATH_YAML_1_2,
-     'json', SIMPLE_JSON),
+     'json', open(SIMPLE_JSON, 'r').read()),
     (FILEPATH_YAML_2_1, FILEPATH_YAML_2_2,
-     'json', COMPLEX_JSON,), ])
+     'json', open(COMPLEX_JSON, 'r').read(),), ])
 def test_generate_diff(first_file, second_file, format, expected):
     assert generate_diff(first_file, second_file, format) == expected
