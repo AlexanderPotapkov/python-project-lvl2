@@ -37,27 +37,27 @@ def get_value(dict1, dict2, key):
     """
     if key in dict1 and key not in dict2:
         value = {
-            'status': 'removed',
+            'type': 'removed',
             'value': dict1.get(key)}
 
     elif key in dict2 and key not in dict1:
         value = {
-            'status': 'added',
+            'type': 'added',
             'value': dict2.get(key)}
 
     elif dict1[key] == dict2[key]:
         value = {
-            'status': 'not changed',
+            'type': 'not changed',
             'value': dict1.get(key)}
 
     elif isinstance(dict1[key], dict) and isinstance(dict2[key], dict):
         value = {
-            'status': 'nested',
+            'type': 'nested',
             'children': search_difference(dict1[key], dict2[key])}
 
     elif not is_dictionary(dict1[key]) or not is_dictionary(dict2[key]):
         value = {
-            'status': 'updated',
+            'type': 'updated',
             'value1': dict1.get(key),
             'value2': dict2.get(key)}
 

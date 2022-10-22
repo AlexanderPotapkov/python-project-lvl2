@@ -15,12 +15,12 @@ def test_search_difference():
     dict1 = {"a": "aa", "b": "bb", "d": {"dd": "ddd"}}
     dict2 = {"b": "bbb", "c": "cc", "d": {"dd": "dddd"}}
     expectation = (
-    {'a': {'status': 'removed', 'value': 'aa'},  # noqa
-     'b': {'status': 'updated', 'value1': 'bb',
+    {'a': {'type': 'removed', 'value': 'aa'},  # noqa
+     'b': {'type': 'updated', 'value1': 'bb',
            'value2': 'bbb'},
-     'c': {'status': 'added', 'value': 'cc'},
-     'd': {'status': 'nested', 'children':
-           {'dd': {'status': 'updated',
+     'c': {'type': 'added', 'value': 'cc'},
+     'd': {'type': 'nested', 'children':
+           {'dd': {'type': 'updated',
                    'value1': 'ddd', 'value2': 'dddd'}}}
      })
     assert search_difference(dict1, dict2) == expectation
@@ -30,11 +30,11 @@ def test_get_value():
     dict1 = {"a": "aa", "b": "bb"}
     dict2 = {"b": "bb", "c": "cc"}
     assert get_value(dict1, dict2, 'a') == {
-        'status': 'removed',
+        'type': 'removed',
         'value': 'aa'}
     assert get_value(dict1, dict2, 'b') == {
-        'status': 'not changed',
+        'type': 'not changed',
         'value': 'bb'}
     assert get_value(dict1, dict2, 'c') == {
-        'status': 'added',
+        'type': 'added',
         'value': 'cc'}

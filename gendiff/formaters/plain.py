@@ -24,7 +24,7 @@ def format_plain(diff, path=''):
     keys = sorted(diff.keys())
     difference = []
     for key in keys:
-        status = diff[key]['status']
+        status = diff[key]['type']
         full_path = path
         string = get_formated_object(key, diff, full_path, status)
         if string:
