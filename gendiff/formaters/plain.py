@@ -1,5 +1,6 @@
 import json
 
+
 def format_value(value):
     if isinstance(value, bool) or value is None:
         return json.dumps(value)
