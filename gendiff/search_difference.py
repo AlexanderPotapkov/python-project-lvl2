@@ -60,5 +60,4 @@ def get_value(dict1, dict2, key):
         value = {
             'type': 'nested',
             'children': search_difference(dict1[key], dict2[key])}
-
     return value
