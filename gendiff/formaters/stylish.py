@@ -1,4 +1,4 @@
-from json import JSONEncoder
+import json
 
 prefixes = {
     'removed': '  - ',
@@ -10,9 +10,8 @@ prefixes = {
 
 
 def format_value(value, depth=0):
-    """Returns formatted value if it necessary"""
-    if type(value) == bool or value is None:
-        return JSONEncoder().encode(value)
+    if isinstance(value, bool) or value is None:
+        return json.dumps(value)
     elif isinstance(value, dict):
         return get_string_from_dictionary(value, depth + 1)
     return str(value)
@@ -89,6 +88,9 @@ def get_string_from_dictionary(diff, depth):
             nested_diff.append(string)
         nested_diff.append(f'{indent}}}')
     else:
-        string = format_value(diff, depth)
-        nested_diff.append(string)
+        if isinstance(diff, bool) or diff is None:
+            nested_diff.append(json.dumps(diff))
+        elif isinstance(diff, dict):
+            nested_diff.append(diff, depth + 1)
+        nested_diff.append(str(diff))
     return '\n'.join(nested_diff)
