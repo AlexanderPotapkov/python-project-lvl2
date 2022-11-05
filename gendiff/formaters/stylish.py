@@ -14,7 +14,7 @@ INDENT = '    '
 
 
 def format_value(value, depth=0):
-    """Returns formated value if it necessary"""
+    """Returns formatted value if it necessary"""
     if type(value) == bool or value is None:
         return JSONEncoder().encode(value)
     elif is_dictionary(value):
@@ -24,9 +24,9 @@ def format_value(value, depth=0):
 
 def format_stylish(diff, depth=0):
     """
-    Returns formated difference between two files in stylish format
+    Returns formatted difference between two files in stylish format
     arguments:
-    diff: raw differene between two files
+    diff: raw difference between two files
     depth: level of nesting to build correct difference
     """
     indent = INDENT * depth
@@ -35,15 +35,15 @@ def format_stylish(diff, depth=0):
 
     for key in keys:
         status = diff[key]['type']
-        string = get_formated_string(status, diff, key, depth)
+        string = get_formated_string(INDENT, status, diff, key, depth)
         difference.append(string)
     difference.append(f'{indent}}}')
     return '\n'.join(difference)
 
 
-def get_formated_string(status, diff, key, depth):
+def get_formated_string(INDENT, status, diff, key, depth):
     """
-    Return formated string in dependence of node's status
+    Return formatted string in dependence of node's status
     arguments:
     status: status of node
     diff: difference between two files
