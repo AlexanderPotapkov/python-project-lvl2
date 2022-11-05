@@ -38,30 +38,34 @@ def test_default_format():
         FILEPATH_JSON_1_1, FILEPATH_JSON_1_2, 'stylish'))
 
 
+def read_file(format):
+    return open(format, 'r').read()
+
+
 @pytest.mark.parametrize('first_file, second_file, format, expected', [
     (FILEPATH_JSON_1_1, FILEPATH_JSON_1_2,
-     'stylish', open(SIMPLE_STYLISH, 'r').read()),
+     'stylish', read_file(SIMPLE_STYLISH)),
     (FILEPATH_JSON_2_1, FILEPATH_JSON_2_2,
-     'stylish', open(COMPLEX_STYLISH, 'r').read()),
+     'stylish', read_file(COMPLEX_STYLISH)),
     (FILEPATH_JSON_1_1, FILEPATH_JSON_1_2,
-     'plain', open(SIMPLE_PLAIN, 'r').read()),
+     'plain', read_file(SIMPLE_PLAIN)),
     (FILEPATH_JSON_2_1, FILEPATH_JSON_2_2,
-     'plain', open(COMPLEX_PLAIN, 'r').read()),
+     'plain', read_file(COMPLEX_PLAIN)),
     (FILEPATH_JSON_1_1, FILEPATH_JSON_1_2,
-     'json', open(SIMPLE_JSON, 'r').read()),
+     'json', read_file(SIMPLE_JSON)),
     (FILEPATH_JSON_2_1, FILEPATH_JSON_2_2,
-     'json', open(COMPLEX_JSON, 'r').read()),
+     'json', read_file(COMPLEX_JSON)),
     (FILEPATH_YAML_1_1, FILEPATH_YAML_1_2,
-     'stylish', open(SIMPLE_STYLISH, 'r').read()),
+     'stylish', read_file(SIMPLE_STYLISH)),
     (FILEPATH_YAML_2_1, FILEPATH_YAML_2_2,
-     'stylish', open(COMPLEX_STYLISH, 'r').read()),
+     'stylish', read_file(COMPLEX_STYLISH)),
     (FILEPATH_YAML_1_1, FILEPATH_YAML_1_2,
-     'plain', open(SIMPLE_PLAIN, 'r').read()),
+     'plain', read_file(SIMPLE_PLAIN)),
     (FILEPATH_YAML_2_1, FILEPATH_YAML_2_2,
-     'plain', open(COMPLEX_PLAIN, 'r').read()),
+     'plain', read_file(COMPLEX_PLAIN)),
     (FILEPATH_YAML_1_1, FILEPATH_YAML_1_2,
-     'json', open(SIMPLE_JSON, 'r').read()),
+     'json', read_file(SIMPLE_JSON)),
     (FILEPATH_YAML_2_1, FILEPATH_YAML_2_2,
-     'json', open(COMPLEX_JSON, 'r').read(),), ])
+     'json', read_file(COMPLEX_JSON),), ])
 def test_generate_diff(first_file, second_file, format, expected):
     assert generate_diff(first_file, second_file, format) == expected
