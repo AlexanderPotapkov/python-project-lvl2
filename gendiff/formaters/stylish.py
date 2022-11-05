@@ -10,8 +10,6 @@ prefixes = {
     'nested': '    '
 }
 
-INDENT = '    '
-
 
 def format_value(value, depth=0):
     """Returns formatted value if it necessary"""
@@ -29,47 +27,48 @@ def format_stylish(diff, depth=0):
     diff: raw difference between two files
     depth: level of nesting to build correct difference
     """
-    indent = INDENT * depth
+    indent = '    ' * depth
     difference = ['{']
     keys = diff.keys()
 
     for key in keys:
-        status = diff[key]['type']
-        string = get_formated_string(INDENT, status, diff, key, depth)
+        type = diff[key]['type']
+        string = get_formatted_string(indent, type, diff, key, depth)
         difference.append(string)
     difference.append(f'{indent}}}')
     return '\n'.join(difference)
 
 
-def get_formated_string(INDENT, status, diff, key, depth):
+def get_formatted_string(indent, status, diff, key, depth):
     """
     Return formatted string in dependence of node's status
     arguments:
-    status: status of node
+    indent: amount of whitespaces to build stylish representation
+    type: type of node
     diff: difference between two files
     key: current key
     depth: node's level of nesting
     """
     if status == 'added':
-        string = (f'{INDENT}{prefixes["added"]}{key}: '
+        string = (f'{indent}{prefixes["added"]}{key}: '
                   f'{format_value(diff[key]["value"], depth)}')
 
     elif status == 'removed':
-        string = (f'{INDENT}{prefixes["removed"]}{key}: '
+        string = (f'{indent}{prefixes["removed"]}{key}: '
                   f'{format_value(diff[key]["value"], depth)}')
 
     elif status == 'not changed':
-        string = (f'{INDENT}{prefixes["not changed"]}{key}: '
+        string = (f'{indent}{prefixes["not changed"]}{key}: '
                   f'{format_value(diff[key]["value"], depth)}')
 
     elif status == 'updated':
-        string = (f'{INDENT}{prefixes["removed"]}{key}: '
+        string = (f'{indent}{prefixes["removed"]}{key}: '
                   f'{format_value(diff[key]["value1"], depth)}\n'
-                  f'{INDENT}{prefixes["added"]}{key}: '
+                  f'{indent}{prefixes["added"]}{key}: '
                   f'{format_value(diff[key]["value2"], depth)}')
 
     elif status == 'nested':
-        string = (f'{INDENT}{prefixes[status]}{key}: '
+        string = (f'{indent}{prefixes[status]}{key}: '
                   f'{format_stylish(diff[key]["children"], depth + 1)}')
     return string
 
