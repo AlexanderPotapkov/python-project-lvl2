@@ -56,7 +56,6 @@ def get_value(dict1, dict2, key):
             'value1': dict1.get(key),
             'value2': dict2.get(key)}
 
-
     elif isinstance(dict1[key], dict) and isinstance(dict2[key], dict):
         value = {
             'type': 'nested',
