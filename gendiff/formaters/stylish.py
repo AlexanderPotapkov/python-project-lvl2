@@ -81,7 +81,7 @@ def get_string_from_dictionary(diff, depth):
     diff: difference between two files
     depth: node's level of nesting
     """
-    indent = INDENT * depth
+    indent = '    ' * depth
     nested_diff = []
     if is_dictionary(diff):
         nested_diff.append('{')

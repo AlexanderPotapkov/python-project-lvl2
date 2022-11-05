@@ -50,15 +50,15 @@ def get_value(dict1, dict2, key):
             'type': 'not changed',
             'value': dict1.get(key)}
 
-    elif isinstance(dict1[key], dict) and isinstance(dict2[key], dict):
-        value = {
-            'type': 'nested',
-            'children': search_difference(dict1[key], dict2[key])}
-
     elif not is_dictionary(dict1[key]) or not is_dictionary(dict2[key]):
         value = {
             'type': 'updated',
             'value1': dict1.get(key),
             'value2': dict2.get(key)}
+
+    elif isinstance(dict1[key], dict) and isinstance(dict2[key], dict):
+        value = {
+            'type': 'nested',
+            'children': search_difference(dict1[key], dict2[key])}
 
     return value
