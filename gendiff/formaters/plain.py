@@ -1,10 +1,8 @@
-from json import JSONEncoder
-
+import json
 
 def format_value(value):
-    """Returns formatted value if it necessary"""
-    if type(value) == bool or value is None:
-        return JSONEncoder().encode(value)
+    if isinstance(value, bool) or value is None:
+        return json.dumps(value)
     elif isinstance(value, dict):
         return '[complex value]'
     elif type(value) == int:
