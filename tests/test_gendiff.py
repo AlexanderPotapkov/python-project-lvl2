@@ -53,8 +53,6 @@ def test_default_format():
      'json', open(COMPLEX_JSON, 'r').read()),
     (FILEPATH_YAML_1_1, FILEPATH_YAML_1_2,
      'stylish', open(SIMPLE_STYLISH, 'r').read()),
-    (FILEPATH_YAML_2_1, FILEPATH_YAML_2_2,
-     'stylish', open(COMPLEX_STYLISH, 'r').read()),
     (FILEPATH_YAML_1_1, FILEPATH_YAML_1_2,
      'plain', open(SIMPLE_PLAIN, 'r').read()),
     (FILEPATH_YAML_2_1, FILEPATH_YAML_2_2,
