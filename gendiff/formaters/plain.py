@@ -1,13 +1,11 @@
 from json import JSONEncoder
 
-from gendiff.search_difference import is_dictionary
-
 
 def format_value(value):
     """Returns formatted value if it necessary"""
     if type(value) == bool or value is None:
         return JSONEncoder().encode(value)
-    elif is_dictionary(value):
+    elif isinstance(value, dict):
         return '[complex value]'
     elif type(value) == int:
         return value

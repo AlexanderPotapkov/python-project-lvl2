@@ -1,8 +1,3 @@
-def is_dictionary(object):
-    """Return True if object is dictionary, of False if not."""
-    return isinstance(object, dict)
-
-
 def get_keys(dict1, dict2):
     """
     Return set of keys in two dictionaries.
@@ -50,7 +45,7 @@ def get_value(dict1, dict2, key):
             'type': 'not changed',
             'value': dict1.get(key)}
 
-    elif not is_dictionary(dict1[key]) or not is_dictionary(dict2[key]):
+    elif not isinstance(dict1[key], dict) or not isinstance(dict2[key], dict):
         value = {
             'type': 'updated',
             'value1': dict1.get(key),

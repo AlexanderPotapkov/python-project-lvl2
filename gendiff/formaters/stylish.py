@@ -1,7 +1,5 @@
 from json import JSONEncoder
 
-from gendiff.search_difference import is_dictionary
-
 prefixes = {
     'removed': '  - ',
     'added': '  + ',
@@ -15,7 +13,7 @@ def format_value(value, depth=0):
     """Returns formatted value if it necessary"""
     if type(value) == bool or value is None:
         return JSONEncoder().encode(value)
-    elif is_dictionary(value):
+    elif isinstance(value, dict):
         return get_string_from_dictionary(value, depth + 1)
     return str(value)
 
@@ -82,7 +80,7 @@ def get_string_from_dictionary(diff, depth):
     """
     indent = '    ' * depth
     nested_diff = []
-    if is_dictionary(diff):
+    if isinstance(diff, dict):
         nested_diff.append('{')
         keys = diff.keys()
         for key in keys:
